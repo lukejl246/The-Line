@@ -1,0 +1,284 @@
+[
+  {
+    "tile": "btc_bmsb",
+    "date": "2018-02-04",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2018-02-25",
+    "from": "red",
+    "to": "amber"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2018-03-04",
+    "from": "amber",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2018-03-18",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2018-04-29",
+    "from": "red",
+    "to": "amber"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2018-05-13",
+    "from": "amber",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2018-07-29",
+    "from": "red",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2018-08-05",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2019-03-31",
+    "from": "red",
+    "to": "amber"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2019-04-07",
+    "from": "amber",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2019-09-29",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2019-10-27",
+    "from": "red",
+    "to": "amber"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2019-11-17",
+    "from": "amber",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2020-01-19",
+    "from": "red",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2020-03-08",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "eth_llrb",
+    "date": "2020-03-15",
+    "from": "green",
+    "to": "amber"
+  },
+  {
+    "tile": "eth_llrb",
+    "date": "2020-04-05",
+    "from": "amber",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2020-05-03",
+    "from": "red",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2021-05-23",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2021-08-08",
+    "from": "red",
+    "to": "amber"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2021-08-15",
+    "from": "amber",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2021-12-05",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2022-03-27",
+    "from": "red",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2022-04-10",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2023-01-15",
+    "from": "red",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2023-08-20",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2023-10-22",
+    "from": "red",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2024-06-30",
+    "from": "green",
+    "to": "amber"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2024-07-07",
+    "from": "amber",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2024-07-21",
+    "from": "red",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2024-08-04",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2024-09-29",
+    "from": "red",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2025-03-09",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2025-05-04",
+    "from": "red",
+    "to": "green"
+  },
+  {
+    "tile": "alt_btc_50d",
+    "date": "2025-10-12",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2025-11-09",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "alt_btc_50d",
+    "date": "2025-11-16",
+    "from": "red",
+    "to": "green"
+  },
+  {
+    "tile": "alt_btc_50d",
+    "date": "2025-12-28",
+    "from": "green",
+    "to": "amber"
+  },
+  {
+    "tile": "alt_btc_50d",
+    "date": "2026-02-01",
+    "from": "amber",
+    "to": "green"
+  },
+  {
+    "tile": "total3_trend",
+    "date": "2026-02-01",
+    "from": "amber",
+    "to": "red"
+  },
+  {
+    "tile": "alt_btc_50d",
+    "date": "2026-04-12",
+    "from": "green",
+    "to": "red"
+  },
+  {
+    "tile": "total3_trend",
+    "date": "2026-04-19",
+    "from": "red",
+    "to": "amber"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2026-05-03",
+    "from": "red",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2026-05-24",
+    "from": "green",
+    "to": "amber"
+  },
+  {
+    "tile": "alt_btc_50d",
+    "date": "2026-05-31",
+    "from": "red",
+    "to": "green"
+  },
+  {
+    "tile": "btc_bmsb",
+    "date": "2026-06-07",
+    "from": "amber",
+    "to": "red"
+  },
+  {
+    "tile": "total3_trend",
+    "date": "2026-06-07",
+    "from": "amber",
+    "to": "red"
+  }
+]
