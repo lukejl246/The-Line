@@ -1,0 +1,21 @@
+{
+  "name": "the-line",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "workspaces": [
+    "pipeline",
+    "web"
+  ],
+  "scripts": {
+    "test": "npm run test -w pipeline",
+    "typecheck": "npm run typecheck -w pipeline && npm run typecheck -w web",
+    "pipeline": "npm run start -w pipeline",
+    "backfill": "npm run backfill -w pipeline",
+    "dev": "npm run dev -w web",
+    "build": "npm run build -w web"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
