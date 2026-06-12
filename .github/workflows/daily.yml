@@ -1,0 +1,55 @@
+name: Daily market state
+
+on:
+  schedule:
+    # Daily at 00:15 UTC — shortly after the daily close, and right after the
+    # weekly close on Mondays.
+    - cron: '15 0 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-pipeline
+  cancel-in-progress: false
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Run pipeline
+        run: npm run pipeline
+        env:
+          # Optional: a free CoinGecko demo key raises the rate limit.
+          COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
+      - name: Commit updated data
+        run: |
+          git config user.name "the-line-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet || git commit -m "data: daily update $(date -u +%F)"
+          git push
+      - name: Build dashboard
+        run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
+      - id: deployment
+        uses: actions/deploy-pages@v4
