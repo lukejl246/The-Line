@@ -41,20 +41,6 @@ body {
   font-size: 0.95rem;
 }
 
-/* State colours */
-.state-text-green { color: var(--green); }
-.state-text-amber { color: var(--amber); }
-.state-text-red { color: var(--red); }
-.state-bg-green { background: var(--green); }
-.state-bg-amber { background: var(--amber); }
-.state-bg-red { background: var(--red); }
-.state-border-green { border-top: 3px solid var(--green); }
-.state-border-amber { border-top: 3px solid var(--amber); }
-.state-border-red { border-top: 3px solid var(--red); }
-.state-stroke-green { stroke: var(--green); }
-.state-stroke-amber { stroke: var(--amber); }
-.state-stroke-red { stroke: var(--red); }
-
 /* Confluence headline */
 .confluence {
   margin: 28px 0 8px;
@@ -225,3 +211,17 @@ body {
   color: var(--muted);
   font-size: 0.82rem;
 }
+
+/* State colour utilities — kept last so they win specificity ties. */
+.state-text-green { color: var(--green); }
+.state-text-amber { color: var(--amber); }
+.state-text-red { color: var(--red); }
+.state-bg-green { background: var(--green); }
+.state-bg-amber { background: var(--amber); }
+.state-bg-red { background: var(--red); }
+.state-border-green { border-top: 3px solid var(--green); }
+.state-border-amber { border-top: 3px solid var(--amber); }
+.state-border-red { border-top: 3px solid var(--red); }
+.state-stroke-green { stroke: var(--green); }
+.state-stroke-amber { stroke: var(--amber); }
+.state-stroke-red { stroke: var(--red); }
