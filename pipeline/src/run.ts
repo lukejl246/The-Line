@@ -4,7 +4,7 @@
  * data/state.json + data/flips.json. Stateless and idempotent: flip history
  * is replayed from the full stored series on every run.
  */
-import { fetchDailyCloses } from './sources/binance.js';
+import { fetchDailyCloses } from './sources/prices.js';
 import { fetchTopMarkets } from './sources/coingecko.js';
 import { mergeSeries, readSeries, writeJson } from './storage.js';
 import { altBtcTile, bmsbTile, llrbTile, total3Tile, type TileOutput } from './indicators/tiles.js';
@@ -21,8 +21,8 @@ async function updatePrices(): Promise<{ btc: DailyPoint[]; eth: DailyPoint[] }>
   const ethStored = readSeries('eth_usd');
   // Refetch from the last stored day so completed candles are never missed,
   // even after a multi-day outage.
-  const btcNew = await fetchDailyCloses('BTCUSDT', lastDateMs(btcStored));
-  const ethNew = await fetchDailyCloses('ETHUSDT', lastDateMs(ethStored));
+  const btcNew = await fetchDailyCloses('BTCUSDT', 'BTC-USD', lastDateMs(btcStored));
+  const ethNew = await fetchDailyCloses('ETHUSDT', 'ETH-USD', lastDateMs(ethStored));
   return {
     btc: mergeSeries('btc_usd', btcNew, true),
     eth: mergeSeries('eth_usd', ethNew, true),
