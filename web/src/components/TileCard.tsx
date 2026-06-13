@@ -8,18 +8,22 @@ export function TileCard({ tile }: { tile: Tile }) {
   const explainer = explainers[tile.id];
   const livesDiffer = tile.liveState !== tile.confirmedState;
   return (
-    <article className={`tile state-border-${tile.confirmedState}`}>
+    <article className="tile metal">
       <header className="tile-head">
-        <span className={`light state-bg-${tile.confirmedState}`} aria-label={tile.confirmedState} />
-        <h2>{tile.name}</h2>
+        <span className="led-bezel" aria-label={tile.confirmedState}>
+          <span className={`led led-${tile.confirmedState}`} />
+        </span>
+        <h2 className="engrave">{tile.name}</h2>
       </header>
 
-      <p className="tile-distance">{tile.distanceLabel}</p>
+      <p className={`tile-distance readout state-text-${tile.confirmedState}`}>{tile.distanceLabel}</p>
 
-      <Sparkline metric={tile.sparkline.metric} line={tile.sparkline.line} state={tile.confirmedState} />
+      <div className="spark-screen metal-inset">
+        <Sparkline metric={tile.sparkline.metric} line={tile.sparkline.line} state={tile.confirmedState} />
+      </div>
 
       <div className="tile-meta">
-        <span>
+        <span className="readout">
           {tile.lastFlip
             ? copy.lastFlip(copy.stateWords[tile.confirmedState], fmtDate(tile.lastFlip.date))
             : copy.noFlipYet}
