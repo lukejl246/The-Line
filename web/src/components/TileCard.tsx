@@ -3,27 +3,24 @@ import { copy } from '../content/copy';
 import { explainers } from '../content/explainers';
 import { fmtDate } from '../format';
 import { Sparkline } from './Sparkline';
+import { Explainer } from './Explainer';
 
-export function TileCard({ tile }: { tile: Tile }) {
+export function TileCard({ tile, index }: { tile: Tile; index: number }) {
   const explainer = explainers[tile.id];
   const livesDiffer = tile.liveState !== tile.confirmedState;
   return (
-    <article className="tile metal">
+    <article className="tile rise" style={{ animationDelay: `${0.06 * (index + 1)}s` }}>
       <header className="tile-head">
-        <span className="led-bezel" aria-label={tile.confirmedState}>
-          <span className={`led led-${tile.confirmedState}`} />
-        </span>
-        <h2 className="engrave">{tile.name}</h2>
+        <span className={`dot state-bg-${tile.confirmedState}`} aria-label={tile.confirmedState} />
+        <h2 className="tile-name">{tile.name}</h2>
       </header>
 
-      <p className={`tile-distance readout state-text-${tile.confirmedState}`}>{tile.distanceLabel}</p>
+      <p className={`tile-distance state-text-${tile.confirmedState}`}>{tile.distanceLabel}</p>
 
-      <div className="spark-screen metal-inset">
-        <Sparkline metric={tile.sparkline.metric} line={tile.sparkline.line} state={tile.confirmedState} />
-      </div>
+      <Sparkline metric={tile.sparkline.metric} line={tile.sparkline.line} state={tile.confirmedState} />
 
       <div className="tile-meta">
-        <span className="readout">
+        <span>
           {tile.lastFlip
             ? copy.lastFlip(copy.stateWords[tile.confirmedState], fmtDate(tile.lastFlip.date))
             : copy.noFlipYet}
@@ -44,17 +41,7 @@ export function TileCard({ tile }: { tile: Tile }) {
         )}
       </div>
 
-      {explainer && (
-        <details className="explainer">
-          <summary>{copy.explainerToggle}</summary>
-          <h3>{copy.explainerHeadings.whatItIs}</h3>
-          <p>{explainer.whatItIs}</p>
-          <h3>{copy.explainerHeadings.howToReadIt}</h3>
-          <p>{explainer.howToReadIt}</p>
-          <h3>{copy.explainerHeadings.watchOut}</h3>
-          <p>{explainer.watchOut}</p>
-        </details>
-      )}
+      {explainer && <Explainer content={explainer} />}
     </article>
   );
 }

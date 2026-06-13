@@ -21,34 +21,43 @@ export function App() {
   }, []);
 
   return (
-    <div className="page">
-      <header className="masthead">
-        <h1>{copy.brand}</h1>
-        <p className="tagline">{copy.tagline}</p>
+    <>
+      <header className="appbar">
+        <div className="appbar-inner">
+          <span className="wordmark">{copy.brand}</span>
+          {data.status === 'ready' && (
+            <span className="appbar-meta">{copy.updatedAt(fmtDate(data.state.updatedAt))}</span>
+          )}
+        </div>
       </header>
 
-      {data.status === 'loading' && <p className="status-note">…</p>}
-      {data.status === 'error' && <p className="status-note">{copy.loadError}</p>}
+      <div className="page">
+        {data.status === 'loading' && <p className="status-note">{copy.loading}</p>}
+        {data.status === 'error' && <p className="status-note">{copy.loadError}</p>}
 
-      {data.status === 'ready' && (
-        <>
-          {isStale(data.state.updatedAt) && (
-            <div className="stale-banner">{copy.staleBanner(fmtDate(data.state.updatedAt))}</div>
-          )}
-          <ConfluenceHeadline confluence={data.state.confluence} tiles={data.state.tiles} />
-          <main className="tile-grid">
-            {data.state.tiles.map((tile) => (
-              <TileCard key={tile.id} tile={tile} />
-            ))}
-          </main>
-          <p className="updated-at">{copy.updatedAt(fmtDateTime(data.state.updatedAt))}</p>
-        </>
-      )}
+        {data.status === 'ready' && (
+          <>
+            {isStale(data.state.updatedAt) && (
+              <div className="stale-banner">{copy.staleBanner(fmtDate(data.state.updatedAt))}</div>
+            )}
+            <ConfluenceHeadline confluence={data.state.confluence} tiles={data.state.tiles} />
 
-      <footer className="footer">
-        <p>{copy.footer.method}</p>
-        <p>{copy.footer.disclaimer}</p>
-      </footer>
-    </div>
+            <p className="section-label">{copy.readingsLabel}</p>
+            <main className="tile-grid">
+              {data.state.tiles.map((tile, i) => (
+                <TileCard key={tile.id} tile={tile} index={i} />
+              ))}
+            </main>
+
+            <p className="updated-at">{copy.updatedAt(fmtDateTime(data.state.updatedAt))}</p>
+          </>
+        )}
+
+        <footer className="footer">
+          <p>{copy.footer.method}</p>
+          <p>{copy.footer.disclaimer}</p>
+        </footer>
+      </div>
+    </>
   );
 }

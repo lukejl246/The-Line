@@ -1,7 +1,9 @@
 /** All fixed user-facing copy. Scanned by the forbidden-words guard. */
 export const copy = {
-  brand: 'THE LINE',
+  brand: 'The Line',
   tagline: 'Which side of the line is the market on?',
+  loading: 'Loading…',
+  readingsLabel: 'The four readings',
   confluenceTitle: 'Market state right now',
   changedThisWeekPrefix: 'Changed at the last weekly close:',
   noChangeThisWeek: 'No tiles changed at the last weekly close.',

@@ -1,24 +1,68 @@
+/* ============================================================
+   The Line — calm, Apple-inspired visual system.
+   Light + dark via prefers-color-scheme. Glass is reserved for
+   the sticky header only; content cards stay solid and readable.
+   ============================================================ */
+
 :root {
-  --bg: #090a0d;
-  --bg-2: #0d0f13;
+  --bg: #f5f5f7;
+  --surface: #ffffff;
+  --text: #1c1c1e;
+  --text-2: #6e6e73;
+  --hairline: rgba(60, 60, 67, 0.12);
 
-  /* Brushed gunmetal */
-  --metal-hi: #3a404b;
-  --metal-mid: #282c34;
-  --metal-lo: #191c22;
-  --edge-light: rgba(255, 255, 255, 0.16);
-  --edge-dark: rgba(0, 0, 0, 0.6);
+  --accent: #007aff;
 
-  --text: #eaeef5;
-  --muted: #858da0;
-  --engrave-ink: #767e90;
+  --green: #34c759;
+  --amber: #ff9f0a;
+  --red: #ff3b30;
+  --green-text: #1f8f43;
+  --amber-text: #9a6200;
+  --red-text: #c7362c;
 
-  --green: #34d27f;
-  --amber: #f4b13a;
-  --red: #ff5b5b;
+  --fill: rgba(120, 120, 128, 0.14);
 
-  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Roboto Mono", Menlo, Consolas, monospace;
-  color-scheme: dark;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.04), 0 10px 28px rgba(0, 0, 0, 0.06);
+
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-hairline: rgba(60, 60, 67, 0.14);
+
+  --radius-card: 22px;
+  --radius-hero: 26px;
+
+  --font: ui-rounded, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --surface: #1c1c1e;
+    --text: #ffffff;
+    --text-2: rgba(235, 235, 245, 0.62);
+    --hairline: rgba(84, 84, 88, 0.5);
+
+    --accent: #0a84ff;
+
+    --green: #30d158;
+    --amber: #ffd60a;
+    --red: #ff453a;
+    --green-text: #34d158;
+    --amber-text: #ffd60a;
+    --red-text: #ff6961;
+
+    --fill: rgba(120, 120, 128, 0.28);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.5);
+
+    --glass-bg: rgba(28, 28, 30, 0.62);
+    --glass-hairline: rgba(255, 255, 255, 0.12);
+
+    color-scheme: dark;
+  }
 }
 
 * {
@@ -27,142 +71,146 @@
 
 body {
   margin: 0;
+  background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.55;
-  background:
-    radial-gradient(120% 80% at 50% -10%, #15181e 0%, var(--bg) 60%),
-    var(--bg);
-  background-attachment: fixed;
+  font-family: var(--font);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-.page {
-  max-width: 1040px;
+/* ---- App bar (the single glass surface) --------------------------------- */
+.appbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--glass-bg);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--glass-hairline);
+}
+.appbar-inner {
+  max-width: 760px;
   margin: 0 auto;
-  padding: 30px 20px 52px;
+  padding: 13px 20px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.wordmark {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.appbar-meta {
+  font-size: 0.82rem;
+  color: var(--text-2);
 }
 
-/* ---- Brushed-metal surface ---------------------------------------------- */
-.metal {
-  position: relative;
-  background-color: var(--metal-mid);
-  background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0) 16%),
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0 1px, rgba(0, 0, 0, 0.03) 1px 2px),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55 0.018' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E"),
-    linear-gradient(180deg, var(--metal-hi) 0%, var(--metal-mid) 55%, var(--metal-lo) 100%);
-  background-blend-mode: overlay, overlay, soft-light, normal;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  box-shadow:
-    inset 0 1px 0 var(--edge-light),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.5),
-    0 2px 3px rgba(0, 0, 0, 0.5),
-    0 12px 30px rgba(0, 0, 0, 0.45);
+/* ---- Page ---------------------------------------------------------------- */
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 20px 56px;
 }
 
-/* Recessed well — screens, gauge face */
-.metal-inset {
-  background:
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0 1px, rgba(0, 0, 0, 0.05) 1px 2px),
-    linear-gradient(180deg, #0e1014, #15181d);
-  border: 1px solid rgba(0, 0, 0, 0.55);
-  border-radius: 10px;
-  box-shadow:
-    inset 0 2px 6px rgba(0, 0, 0, 0.7),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+.section-label {
+  margin: 36px 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-2);
+  letter-spacing: 0.01em;
 }
 
-/* ---- Type treatments ---------------------------------------------------- */
-.engrave {
-  color: var(--engrave-ink);
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.65), 0 1px 0 rgba(255, 255, 255, 0.05);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+/* ---- Hero: confluence ---------------------------------------------------- */
+.hero {
+  background: var(--surface);
+  border-radius: var(--radius-hero);
+  box-shadow: var(--shadow-md);
+  padding: 24px 24px 26px;
 }
-.readout {
-  font-family: var(--mono);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.01em;
-}
-
-/* ---- Masthead ----------------------------------------------------------- */
-.masthead {
-  margin-bottom: 24px;
-}
-.masthead h1 {
+.eyebrow {
   margin: 0;
-  font-size: 1.55rem;
-  letter-spacing: 0.42em;
-  font-weight: 800;
-  color: #f1f4fa;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 -1px 0 rgba(255, 255, 255, 0.06);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
 }
-.tagline {
-  margin: 4px 0 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-.masthead::after {
-  content: "";
-  display: block;
-  height: 1px;
-  margin-top: 14px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
-}
-
-/* ---- Confluence cluster ------------------------------------------------- */
-.confluence {
-  margin: 8px 0 18px;
-  padding: 22px 24px;
-}
-.confluence-title {
-  margin: 0 0 6px;
-  font-size: 0.74rem;
-}
-.confluence-cluster {
+.hero-row {
   display: flex;
   align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
+  gap: 14px;
+  margin: 10px 0 18px;
 }
-.gauge {
-  width: 300px;
-  max-width: 100%;
-  flex: none;
-}
-.confluence-readout {
-  display: flex;
-  flex-direction: column;
-  min-width: 160px;
-}
-.confluence-score {
-  font-size: 3.6rem;
+.hero-title {
+  margin: 0;
+  font-size: 2.1rem;
   font-weight: 700;
-  line-height: 1;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
-.confluence-label {
-  font-size: 1.15rem;
-  margin-top: 6px;
-  color: var(--text);
-  letter-spacing: 0.04em;
-  font-weight: 600;
+.score-pill {
+  margin-left: auto;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--fill);
 }
-.confluence-note {
+.hero-note {
   margin: 16px 0 0;
-  color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
+  color: var(--text-2);
 }
 
-/* ---- Tiles -------------------------------------------------------------- */
+/* Segmented score */
+.segscore {
+  margin-top: 4px;
+}
+.segscore-track {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  height: 22px;
+}
+.seg {
+  flex: 1;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--fill);
+  transition: height 0.25s ease, background-color 0.25s ease;
+}
+.seg-active {
+  height: 18px;
+  border-radius: 6px;
+  box-shadow: var(--shadow-sm);
+}
+.segscore-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 0.76rem;
+  color: var(--text-2);
+}
+
+/* ---- Tiles --------------------------------------------------------------- */
 .tile-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-  gap: 18px;
-  margin-top: 18px;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 620px) {
+  .tile-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 .tile {
-  padding: 20px 22px;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-md);
+  padding: 20px 20px 18px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -170,153 +218,168 @@ body {
 .tile-head {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
-.tile-head h2 {
+.dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  flex: none;
+}
+.tile-name {
   margin: 0;
-  font-size: 0.82rem;
-  font-weight: 700;
+  font-size: 0.98rem;
+  font-weight: 600;
 }
 .tile-distance {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 700;
-}
-
-/* Inset LED indicator */
-.led-bezel {
-  flex: none;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(155deg, #2c3038, #121419);
-  box-shadow:
-    inset 0 1px 1px rgba(0, 0, 0, 0.8),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
-    0 1px 0 rgba(255, 255, 255, 0.05);
-}
-.led {
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 28%, var(--led-hi), var(--led) 58%, var(--led-lo));
-  box-shadow:
-    inset 0 0 0 0.5px rgba(0, 0, 0, 0.5),
-    inset 0 1px 1px rgba(255, 255, 255, 0.45),
-    0 0 7px 1px var(--led-glow),
-    0 0 14px 2px var(--led-glow);
-}
-.led-green { --led: #34d27f; --led-hi: #c2f7da; --led-lo: #0e7a45; --led-glow: rgba(52, 210, 127, 0.65); }
-.led-amber { --led: #f4b13a; --led-hi: #ffe7b2; --led-lo: #9a650f; --led-glow: rgba(244, 177, 58, 0.6); }
-.led-red   { --led: #ff5b5b; --led-hi: #ffcccc; --led-lo: #9c1e1e; --led-glow: rgba(255, 91, 91, 0.6); }
-
-/* Sparkline screen */
-.spark-screen {
-  padding: 8px 10px;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
 }
 .sparkline {
   width: 100%;
   height: 56px;
   display: block;
 }
-.sparkline path {
+.sparkline-area {
+  stroke: none;
+}
+.sparkline-metric {
   fill: none;
+  stroke: currentColor;
   stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
 .sparkline-ref {
-  stroke: #5a6072;
-  stroke-dasharray: 3 4;
-  opacity: 0.7;
+  fill: none;
+  stroke: var(--text-2);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+  opacity: 0.5;
+  vector-effect: non-scaling-stroke;
 }
-.sparkline-metric {
-  filter: drop-shadow(0 0 3px var(--trace-glow, rgba(255, 255, 255, 0.25)));
-}
-
 .tile-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 8px 10px;
   align-items: center;
-  color: var(--muted);
-  font-size: 0.82rem;
-}
-.tile-meta .readout {
-  color: #aab2c4;
+  font-size: 0.84rem;
+  color: var(--text-2);
 }
 .badge {
-  border: 1px solid currentColor;
   border-radius: 999px;
-  padding: 1px 10px;
-  font-size: 0.76rem;
+  padding: 2px 11px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: var(--fill);
 }
 
-/* ---- Explainers --------------------------------------------------------- */
+/* ---- Explainer (disclosure) --------------------------------------------- */
 .explainer {
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding-top: 10px;
-  margin-top: 2px;
+  border-top: 1px solid var(--hairline);
+  padding-top: 6px;
 }
 .explainer summary {
-  cursor: pointer;
-  color: var(--muted);
-  font-size: 0.84rem;
   list-style: none;
+  cursor: pointer;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: var(--accent);
+  font-weight: 500;
 }
-.explainer summary::-webkit-details-marker { display: none; }
-.explainer summary::before { content: "▸ "; }
-.explainer[open] summary::before { content: "▾ "; }
-.explainer summary:hover { color: var(--text); }
+.explainer summary::-webkit-details-marker {
+  display: none;
+}
+.chevron {
+  transition: transform 0.2s ease;
+  font-size: 0.7rem;
+}
+.explainer[open] .chevron {
+  transform: rotate(90deg);
+}
+.explainer-body {
+  padding-bottom: 4px;
+}
 .explainer h3 {
-  margin: 12px 0 2px;
-  font-size: 0.72rem;
-  color: var(--engrave-ink);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  margin: 14px 0 2px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
 }
 .explainer p {
-  margin: 4px 0;
+  margin: 2px 0;
   font-size: 0.92rem;
-  color: #c7cdd9;
+  color: var(--text-2);
+  line-height: 1.55;
 }
 
-/* ---- Banners / status --------------------------------------------------- */
+/* ---- Banners / status ---------------------------------------------------- */
 .stale-banner {
-  margin-bottom: 18px;
-  padding: 11px 15px;
-  border-radius: 10px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 14px;
   font-size: 0.9rem;
-  color: var(--amber);
-  background: rgba(244, 177, 58, 0.1);
-  border: 1px solid rgba(244, 177, 58, 0.5);
+  color: var(--amber-text);
+  background: color-mix(in srgb, var(--amber) 14%, var(--surface));
 }
 .status-note {
-  margin-top: 44px;
+  margin-top: 48px;
   text-align: center;
-  color: var(--muted);
+  color: var(--text-2);
 }
 .updated-at {
-  margin: 16px 2px 0;
-  color: var(--muted);
+  margin: 18px 4px 0;
   font-size: 0.8rem;
+  color: var(--text-2);
 }
 .footer {
-  margin-top: 38px;
+  margin-top: 36px;
   padding-top: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-  color: var(--muted);
+  border-top: 1px solid var(--hairline);
+  color: var(--text-2);
   font-size: 0.82rem;
+}
+.footer p {
+  margin: 0 0 8px;
+}
+
+/* ---- Focus + motion ------------------------------------------------------ */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
 
 /* ---- State colour utilities (last, to win specificity ties) ------------- */
-.state-text-green { color: var(--green); }
-.state-text-amber { color: var(--amber); }
-.state-text-red { color: var(--red); }
+.state-text-green { color: var(--green-text); }
+.state-text-amber { color: var(--amber-text); }
+.state-text-red { color: var(--red-text); }
 .state-bg-green { background: var(--green); }
 .state-bg-amber { background: var(--amber); }
 .state-bg-red { background: var(--red); }
-.state-stroke-green { stroke: var(--green); --trace-glow: rgba(52, 210, 127, 0.5); }
-.state-stroke-amber { stroke: var(--amber); --trace-glow: rgba(244, 177, 58, 0.5); }
-.state-stroke-red { stroke: var(--red); --trace-glow: rgba(255, 91, 91, 0.5); }
+.trace-green { color: var(--green); }
+.trace-amber { color: var(--amber); }
+.trace-red { color: var(--red); }
