@@ -286,5 +286,11 @@
     "date": "2026-07-19",
     "from": "green",
     "to": "red"
+  },
+  {
+    "tile": "total3_trend",
+    "date": "2026-08-23",
+    "from": "red",
+    "to": "green"
   }
 ]
