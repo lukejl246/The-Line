@@ -288,6 +288,12 @@
     "to": "red"
   },
   {
+    "tile": "btc_bmsb",
+    "date": "2026-08-23",
+    "from": "red",
+    "to": "green"
+  },
+  {
     "tile": "total3_trend",
     "date": "2026-08-23",
     "from": "red",
