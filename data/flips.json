@@ -304,5 +304,11 @@
     "date": "2026-10-04",
     "from": "red",
     "to": "amber"
+  },
+  {
+    "tile": "total3_trend",
+    "date": "2026-10-18",
+    "from": "green",
+    "to": "amber"
   }
 ]
