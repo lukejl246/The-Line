@@ -310,5 +310,11 @@
     "date": "2026-10-18",
     "from": "green",
     "to": "amber"
+  },
+  {
+    "tile": "alt_btc_50d",
+    "date": "2026-10-25",
+    "from": "amber",
+    "to": "red"
   }
 ]
