@@ -322,5 +322,17 @@
     "date": "2026-11-08",
     "from": "red",
     "to": "amber"
+  },
+  {
+    "tile": "alt_btc_50d",
+    "date": "2026-11-15",
+    "from": "amber",
+    "to": "green"
+  },
+  {
+    "tile": "total3_trend",
+    "date": "2026-11-15",
+    "from": "amber",
+    "to": "red"
   }
 ]
