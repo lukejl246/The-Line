@@ -324,6 +324,12 @@
     "to": "amber"
   },
   {
+    "tile": "btc_bmsb",
+    "date": "2026-11-15",
+    "from": "green",
+    "to": "red"
+  },
+  {
     "tile": "alt_btc_50d",
     "date": "2026-11-15",
     "from": "amber",
